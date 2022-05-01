@@ -1,6 +1,6 @@
 /*
-See the License.txt file for this sample’s licensing information.
-*/
+ See the License.txt file for this sample’s licensing information.
+ */
 
 import SwiftUI
 
@@ -14,7 +14,6 @@ struct FunFactsView: View {
                     .padding()
                     .font(.title)
                     .frame(minHeight: 400)
-
                 Button("Show Random Fact") {
                     funFact = information.funFacts.randomElement() ?? ""
                 }

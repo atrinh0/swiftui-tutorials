@@ -1,6 +1,6 @@
 /*
-See the License.txt file for this sample’s licensing information.
-*/
+ See the License.txt file for this sample’s licensing information.
+ */
 
 import SwiftUI
 
@@ -11,23 +11,19 @@ struct ContentView: View {
                 .tabItem {
                     Label("Profile", systemImage: "person")
                 }
-
             StoryView()
                 .tabItem {
                     Label("Story", systemImage: "book")
                 }
-            
             FavouritesView()
                 .tabItem {
                     Label("Favourites", systemImage: "star")
                 }
-            
             FunFactsView()
                 .tabItem {
                     Label("Fun Facts", systemImage: "hand.thumbsup")
                 }
         }
-        
     }
 }
 

@@ -1,6 +1,6 @@
 /*
-See the License.txt file for this sample’s licensing information.
-*/
+ See the License.txt file for this sample’s licensing information.
+ */
 
 import SwiftUI
 
@@ -13,7 +13,6 @@ struct ProfileView: View {
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(25)
                     .padding(40)
-
                 Text(information.name)
                     .font(.title)
             }

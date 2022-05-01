@@ -1,6 +1,6 @@
 /*
-See the License.txt file for this sample’s licensing information.
-*/
+ See the License.txt file for this sample’s licensing information.
+ */
 
 import SwiftUI
 
@@ -10,21 +10,18 @@ struct FavouritesView: View {
             VStack {
                 Text("Hobbies")
                     .font(.title2)
-
                 HStack(spacing: 30) {
                     ForEach(information.hobbies, id: \.self) { hobby in
                         Image(systemName: hobby)
                             .resizable()
                             .scaledToFit()
                             .frame(maxWidth: 70, maxHeight: 70)
-
+                        
                     }
                 }
                 .padding()
-
                 Text("Foods")
                     .font(.title2)
-
                 HStack(spacing: 30) {
                     ForEach(information.foods, id: \.self) { food in
                         Text(food)
@@ -32,10 +29,8 @@ struct FavouritesView: View {
                     }
                 }
                 .padding()
-
                 Text("Colours")
                     .font(.title2)
-
                 HStack(spacing: 30) {
                     ForEach(information.colors, id: \.self) { color in
                         Circle()
