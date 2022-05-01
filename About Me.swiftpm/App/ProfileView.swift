@@ -5,7 +5,6 @@ See the License.txt file for this sample’s licensing information.
 import SwiftUI
 
 struct ProfileView: View {
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -21,7 +20,6 @@ struct ProfileView: View {
             .navigationTitle("Profile")
         }
     }
-    
 }
 
 struct ProfileView_Previews: PreviewProvider {

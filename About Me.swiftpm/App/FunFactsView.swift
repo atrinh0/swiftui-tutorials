@@ -5,8 +5,8 @@ See the License.txt file for this sample’s licensing information.
 import SwiftUI
 
 struct FunFactsView: View {
-
     @State private var funFact = ""
+    
     var body: some View {
         NavigationView {
             VStack {
