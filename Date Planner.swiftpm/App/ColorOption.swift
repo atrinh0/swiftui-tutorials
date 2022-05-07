@@ -18,14 +18,9 @@ struct ColorOptions {
         .purple,
     ]
     
-    static var `default` : Color = Color.primary
+    static var `default`: Color = .primary
     
     static func random() -> Color {
-        if let element = ColorOptions.all.randomElement() {
-            return element
-        } else {
-            return .primary
-        }
-        
+        ColorOptions.all.randomElement() ?? self.default
     }
 }

@@ -6,19 +6,11 @@ import Foundation
 
 struct EventSymbols {
     static func randomName() -> String {
-        if let random = symbolNames.randomElement() {
-            return random
-        } else {
-            return ""
-        }
+        symbolNames.randomElement() ?? ""
     }
     
     static func randomNames(_ number: Int) -> [String] {
-        var names: [String] = []
-        for _ in 0..<number {
-            names.append(randomName())
-        }
-        return names
+        (0..<number).map { _ in randomName() }
     }
         
     static var symbolNames: [String] = [
