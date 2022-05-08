@@ -11,7 +11,7 @@ struct SymbolPicker: View {
     @State private var symbolNames = EventSymbols.symbolNames
     @State private var searchInput = ""
     
-    var columns = Array(repeating: GridItem(.flexible()), count: 6)
+    let columns = Array(repeating: GridItem(.flexible()), count: 6)
 
     var body: some View {
         VStack {

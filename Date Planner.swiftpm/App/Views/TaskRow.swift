@@ -39,7 +39,6 @@ struct TaskRow: View {
             }
         }
     }
-        
 }
 
 struct TaskRow_Previews: PreviewProvider {

@@ -12,7 +12,6 @@ struct EventDetail: View {
     
     var body: some View {
         List {
-
             HStack {
                 Button {
                     isPickingSymbol.toggle()
