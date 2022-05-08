@@ -29,7 +29,6 @@ struct SymbolPicker: View {
                     .font(.title)
                     .imageScale(.large)
                     .foregroundColor(selectedColor)
-
             }
             .padding()
 

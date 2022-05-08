@@ -27,7 +27,6 @@ struct EventRow: View {
                 Image(systemName: "checkmark")
                     .foregroundStyle(.secondary)
             }
-            
         }
         .badge(event.remainingTaskCount)
     }

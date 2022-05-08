@@ -26,7 +26,6 @@ struct TaskRow: View {
                             task.isNew = false
                         }
                     }
-
             } else {
                 Text(task.text)
             }

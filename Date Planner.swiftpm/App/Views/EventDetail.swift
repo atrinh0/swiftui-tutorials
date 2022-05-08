@@ -39,7 +39,6 @@ struct EventDetail: View {
                 DatePicker("Date", selection: $event.date)
                     .labelsHidden()
                     .listRowSeparator(.hidden)
-
             } else {
                 HStack {
                     Text(event.date, style: .date)

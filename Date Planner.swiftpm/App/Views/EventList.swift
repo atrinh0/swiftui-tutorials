@@ -10,7 +10,6 @@ struct EventList: View {
     @State private var newEvent = Event()
     
     var body: some View {
-        
         List {
             ForEach(Period.allCases) { period in
                 if !eventData.sortedEvents(period: period).isEmpty {

@@ -1,6 +1,6 @@
 /*
-See the License.txt file for this sample’s licensing information.
-*/
+ See the License.txt file for this sample’s licensing information.
+ */
 
 import SwiftUI
 
@@ -55,19 +55,18 @@ struct EventEditor: View {
                     eventCopy = event // Grab a copy in case we decide to make edits.
                 }
                 .disabled(isEventDeleted)
-
+            
             if isEditing && !isNew {
-
-                Button(role: .destructive, action: {
+                Button(role: .destructive) {
                     isDeleted = true
                     dismiss()
                     eventData.delete(event)
-                }, label: {
+                } label: {
                     Label("Delete Event", systemImage: "trash.circle.fill")
                         .font(.title2)
                         .foregroundColor(.red)
-                })
-                    .padding()
+                }
+                .padding()
             }
         }
         .overlay(alignment: .center) {

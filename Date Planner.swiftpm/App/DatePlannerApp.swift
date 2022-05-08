@@ -16,7 +16,6 @@ struct DatePlannerApp: App {
                     .foregroundStyle(.secondary)
             }
             .environmentObject(eventData)
-
         }
     }
 }
