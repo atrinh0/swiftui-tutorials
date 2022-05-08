@@ -61,6 +61,6 @@ struct EventSymbols {
         "mappin.and.ellipse",
         "facemask.fill",
         "eyeglasses",
-        "tram.fill",
+        "tram.fill"
     ]
 }

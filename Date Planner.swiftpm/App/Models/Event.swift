@@ -42,9 +42,9 @@ struct Event: Identifiable, Hashable {
         tasks: [
             EventTask(text: "Buy plane tickets"),
             EventTask(text: "Get a new bathing suit"),
-            EventTask(text: "Find an airbnb"),
+            EventTask(text: "Find an airbnb")
         ],
-        date: Date(timeIntervalSinceNow: 60 * 60 * 24 * 365 * 1.5))
+        date: Date(timeIntervalSinceNow: TimeInterval.oneYear * 1.5))
 }
 
 // Convenience methods for dates.

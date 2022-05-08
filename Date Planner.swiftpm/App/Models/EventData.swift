@@ -12,24 +12,24 @@ class EventData: ObservableObject {
               tasks: [EventTask(text: "Guava kombucha"),
                       EventTask(text: "Paper cups and plates"),
                       EventTask(text: "Cheese plate"),
-                      EventTask(text: "Party poppers"),
+                      EventTask(text: "Party poppers")
                      ],
-              date: Date.roundedHoursFromNow(60 * 60 * 24 * 30)),
+              date: Date.roundedHoursFromNow(TimeInterval.oneDay * 30)),
         Event(symbol: "theatermasks.fill",
               color: .yellow,
               title: "Pagliacci",
               tasks: [EventTask(text: "Buy new tux"),
                       EventTask(text: "Get tickets"),
-                      EventTask(text: "Pick up Carmen at the airport and bring her to the show"),
+                      EventTask(text: "Pick up Carmen at the airport and bring her to the show")
                      ],
-              date: Date.roundedHoursFromNow(60 * 60 * 22)),
+              date: Date.roundedHoursFromNow(TimeInterval.oneHour * 22)),
         Event(symbol: "facemask.fill",
               color: .indigo,
               title: "Doctor's Appointment",
               tasks: [EventTask(text: "Bring medical ID"),
-                      EventTask(text: "Record heart rate data"),
+                      EventTask(text: "Record heart rate data")
                      ],
-              date: Date.roundedHoursFromNow(60 * 60 * 24 * 4)),
+              date: Date.roundedHoursFromNow(TimeInterval.oneDay * 4)),
         Event(symbol: "leaf.fill",
               color: .green,
               title: "Camping Trip",
@@ -37,16 +37,16 @@ class EventData: ObservableObject {
                       EventTask(text: "Bug spray"),
                       EventTask(text: "Paper towels"),
                       EventTask(text: "Food for 4 meals"),
-                      EventTask(text: "Straw hat"),
+                      EventTask(text: "Straw hat")
                      ],
-              date: Date.roundedHoursFromNow(60 * 60 * 36)),
+              date: Date.roundedHoursFromNow(TimeInterval.oneHour * 36)),
         Event(symbol: "gamecontroller.fill",
               color: .cyan,
               title: "Game Night",
               tasks: [EventTask(text: "Find a board game to bring"),
-                      EventTask(text: "Bring a desert to share"),
+                      EventTask(text: "Bring a desert to share")
                      ],
-              date: Date.roundedHoursFromNow(60 * 60 * 24 * 2)),
+              date: Date.roundedHoursFromNow(TimeInterval.oneDay * 2)),
         Event(symbol: "graduationcap.fill",
               color: .primary,
               title: "First Day of School",
@@ -54,18 +54,18 @@ class EventData: ObservableObject {
                   EventTask(text: "Notebooks"),
                   EventTask(text: "Pencils"),
                   EventTask(text: "Binder"),
-                  EventTask(text: "First day of school outfit"),
+                  EventTask(text: "First day of school outfit")
               ],
-              date: Date.roundedHoursFromNow(60 * 60 * 24 * 365)),
+              date: Date.roundedHoursFromNow(TimeInterval.oneYear)),
         Event(symbol: "book.fill",
               color: .purple,
               title: "Book Launch",
               tasks: [
                   EventTask(text: "Finish first draft"),
                   EventTask(text: "Send draft to editor"),
-                  EventTask(text: "Final read-through"),
+                  EventTask(text: "Final read-through")
               ],
-              date: Date.roundedHoursFromNow(60 * 60 * 24 * 365 * 2)),
+              date: Date.roundedHoursFromNow(TimeInterval.oneYear * 2)),
         Event(symbol: "globe.americas.fill",
               color: .gray,
               title: "WWDC",
@@ -73,18 +73,18 @@ class EventData: ObservableObject {
                   EventTask(text: "Watch Keynote"),
                   EventTask(text: "Watch What's new in SwiftUI"),
                   EventTask(text: "Go to DT developer labs"),
-                  EventTask(text: "Learn about Create ML"),
+                  EventTask(text: "Learn about Create ML")
               ],
-              date: Date.from(month: 6, day: 7, year: 2021)),
+              date: Date.from(day: 7, month: 6, year: 2021)),
         Event(symbol: "case.fill",
               color: .orange,
               title: "Sayulita Trip",
               tasks: [
                   EventTask(text: "Buy plane tickets"),
                   EventTask(text: "Get a new bathing suit"),
-                  EventTask(text: "Find a hotel room"),
+                  EventTask(text: "Find a hotel room")
               ],
-              date: Date.roundedHoursFromNow(60 * 60 * 24 * 19)),
+              date: Date.roundedHoursFromNow(TimeInterval.oneDay * 19))
     ]
 
     func delete(_ event: Event) {
@@ -139,7 +139,7 @@ enum Period: String, CaseIterable, Identifiable {
 }
 
 extension Date {
-    static func from(month: Int, day: Int, year: Int) -> Date {
+    static func from(day: Int, month: Int, year: Int) -> Date {
         var dateComponents = DateComponents()
         dateComponents.year = year
         dateComponents.month = month
@@ -159,5 +159,19 @@ extension Date {
             return exactDate
         }
         return hourRange.end
+    }
+}
+
+extension TimeInterval {
+    static var oneHour: Double {
+        60 * 60
+    }
+    
+    static var oneDay: Double {
+        oneHour * 24
+    }
+    
+    static var oneYear: Double {
+        oneDay * 365
     }
 }

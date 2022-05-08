@@ -15,7 +15,7 @@ struct ColorOptions {
         .mint,
         .cyan,
         .indigo,
-        .purple,
+        .purple
     ]
     
     static var `default`: Color = .primary
