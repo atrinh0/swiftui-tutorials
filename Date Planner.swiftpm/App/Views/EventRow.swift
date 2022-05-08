@@ -7,11 +7,14 @@ import SwiftUI
 struct EventRow: View {
     let event: Event
     
+    @ScaledMetric var symbolWidth: CGFloat = 40
+    
     var body: some View {
         HStack {
             Image(systemName: event.symbol)
                 .sfSymbolStyling()
                 .foregroundStyle(event.color)
+                .frame(width: symbolWidth)
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(event.title)
