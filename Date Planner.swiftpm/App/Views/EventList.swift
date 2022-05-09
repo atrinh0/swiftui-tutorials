@@ -13,7 +13,7 @@ struct EventList: View {
         List {
             ForEach(Period.allCases) { period in
                 if !eventData.sortedEvents(period: period).isEmpty {
-                    Section(content: {
+                    Section {
                         ForEach(eventData.sortedEvents(period: period)) { $event in
                             NavigationLink {
                                 EventEditor(event: $event)
@@ -28,12 +28,12 @@ struct EventList: View {
                                 }
                             }
                         }
-                    }, header: {
+                    } header: {
                         Text(period.name)
                             .font(.callout)
                             .foregroundColor(.secondary)
                             .fontWeight(.bold)
-                    })
+                    }
                 }
             }
         }

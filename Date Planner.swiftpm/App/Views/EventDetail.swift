@@ -52,9 +52,9 @@ struct EventDetail: View {
             ForEach($event.tasks) { $item in
                 TaskRow(task: $item, isEditing: isEditing)
             }
-            .onDelete(perform: { indexSet in
+            .onDelete { indexSet in
                 event.tasks.remove(atOffsets: indexSet)
-            })
+            }
             
             Button {
                 event.tasks.append(EventTask(text: "", isNew: true))
