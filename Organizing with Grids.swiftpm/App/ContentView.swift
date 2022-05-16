@@ -25,10 +25,10 @@ struct ContentView: View {
         .gray
     ]
 
-    let cols: Int = 3
-    let spacing: CGFloat = 3
-    let imgSize = CGSize(width: 120, height: 120)
-    var hexagonWidth: CGFloat { (imgSize.width / 2) * cos(.pi / 6) * 2 }
+    private let cols: Int = 3
+    private let spacing: CGFloat = 3
+    private let imgSize = CGSize(width: 120, height: 120)
+    private var hexagonWidth: CGFloat { (imgSize.width / 2) * cos(.pi / 6) * 2 }
 
     var body: some View {
         let gridItems = Array(repeating: GridItem(.fixed(hexagonWidth), spacing: spacing), count: cols)
@@ -61,7 +61,7 @@ struct ContentView: View {
         }
     }
 
-    func isEvenRow(_ idx: Int) -> Bool {
+    private func isEvenRow(_ idx: Int) -> Bool {
         (idx / cols) % 2 == 0
     }
 }
