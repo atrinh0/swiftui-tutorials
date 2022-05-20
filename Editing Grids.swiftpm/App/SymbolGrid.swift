@@ -107,6 +107,7 @@ struct SymbolGrid: View {
         withAnimation {
             symbols.insert(Symbol(name: name), at: 0)
         }
+        selectedSymbolName = nil
     }
 }
 
