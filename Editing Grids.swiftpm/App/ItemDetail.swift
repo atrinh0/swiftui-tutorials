@@ -11,7 +11,6 @@ struct ItemDetail: View {
         VStack {
             Text(symbolName)
                 .font(.system(.largeTitle, design: .rounded))
-            
             Image(systemName: symbolName)
                 .resizable()
                 .scaledToFit()

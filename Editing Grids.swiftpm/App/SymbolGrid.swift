@@ -5,7 +5,6 @@ See the License.txt file for this sample’s licensing information.
 import SwiftUI
 
 struct SymbolGrid: View {
-
     @State private var isAddingSymbol = false
     @State private var isEditing = false
 
@@ -26,10 +25,10 @@ struct SymbolGrid: View {
         "brain.head.profile",
         "brain",
         "icloud",
-        "theatermasks.fill",
+        "theatermasks.fill"
     ]
     
-    var columnsText: String {
+    private var columnsText: String {
         numColumns > 1 ? "\(numColumns) Columns" : "1 Column"
     }
 
@@ -37,7 +36,9 @@ struct SymbolGrid: View {
         VStack {
             if isEditing {
                 Stepper(columnsText, value: $numColumns, in: 1...6, step: 1) { _ in
-                    withAnimation { gridColumns = Array(repeating: GridItem(.flexible()), count: numColumns) }
+                    withAnimation {
+                        gridColumns = Array(repeating: GridItem(.flexible()), count: numColumns)
+                    }
                 }
                 .padding()
             }
@@ -97,10 +98,9 @@ struct SymbolGrid: View {
                 .disabled(isEditing)
             }
         }
-
     }
     
-    func addSymbol() {
+    private func addSymbol() {
         guard let name = selectedSymbolName else { return }
         withAnimation {
             symbolNames.insert(name, at: 0)

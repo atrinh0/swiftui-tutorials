@@ -8,9 +8,9 @@ struct SymbolPicker: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var name: String?
 
-    let columns = Array(repeating: GridItem(.flexible()), count: 4)
+    private let columns = Array(repeating: GridItem(.flexible()), count: 4)
 
-    let pickableItems = [
+    private let pickableItems = [
         "house.fill",
         "sun.max.fill",
         "cloud.rain.fill",
@@ -38,8 +38,7 @@ struct SymbolPicker: View {
         "hands.sparkles.fill",
         "hand.draw.fill",
         "waveform.path.ecg.rectangle.fill",
-        "gyroscope",
-        
+        "gyroscope"
     ]
 
     var body: some View {
