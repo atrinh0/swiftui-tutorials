@@ -6,7 +6,7 @@ import SwiftUI
 
 struct SymbolGrid: View {
     @State private var isAddingSymbol = false
-    @State private var isEditing = false
+    @State private var editMode = EditMode.inactive
 
     private static let initialColumns = 3
     @State private var selectedSymbolName: String?
@@ -29,7 +29,9 @@ struct SymbolGrid: View {
         "sparkles",
         "circle.hexagongrid.fill"
     ]
-    
+
+    private var isEditing: Bool { editMode == .active }
+
     var body: some View {
         VStack {
             if isEditing {
@@ -78,9 +80,7 @@ struct SymbolGrid: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(isEditing ? "Done" : "Edit") {
-                    withAnimation { isEditing.toggle() }
-                }
+                EditButton()
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -91,6 +91,7 @@ struct SymbolGrid: View {
                 .disabled(isEditing)
             }
         }
+        .environment(\.editMode, $editMode)
     }
     
     private func addSymbol() {
