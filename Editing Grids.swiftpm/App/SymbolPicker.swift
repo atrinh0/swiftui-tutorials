@@ -13,7 +13,6 @@ struct SymbolPicker: View {
     private let pickableItems = [
         "house.fill",
         "sun.max.fill",
-        "cloud.rain.fill",
         "pawprint.fill",
         "lungs.fill",
         "face.smiling",
@@ -38,7 +37,11 @@ struct SymbolPicker: View {
         "hands.sparkles.fill",
         "hand.draw.fill",
         "waveform.path.ecg.rectangle.fill",
-        "gyroscope"
+        "gyroscope",
+        "link.badge.plus",
+        "moon.circle.fill",
+        "sparkles",
+        "circle.hexagongrid.fill"
     ]
 
     var body: some View {
@@ -52,7 +55,7 @@ struct SymbolPicker: View {
                         Image(systemName: item)
                             .resizable()
                             .scaledToFit()
-                            .symbolRenderingMode(.hierarchical)
+                            .symbolRenderingMode(.multicolor)
                             .foregroundColor(.accentColor)
                             .ignoresSafeArea(.container, edges: .bottom)
                     }

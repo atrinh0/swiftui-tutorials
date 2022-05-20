@@ -12,20 +12,22 @@ struct SymbolGrid: View {
     @State private var selectedSymbolName: String?
     @State private var numColumns = initialColumns
     @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
-    
-    @State private var symbolNames = [
-        "tshirt",
-        "eyes",
-        "eyebrow",
-        "nose",
-        "mustache",
-        "mouth",
-        "eyeglasses",
-        "facemask",
-        "brain.head.profile",
-        "brain",
-        "icloud",
-        "theatermasks.fill"
+
+    @State private var symbols: [Symbol] = symbolNames.map { Symbol(name: $0) }
+
+    private static let symbolNames = [
+        "sun.max.fill",
+        "lungs.fill",
+        "gear",
+        "allergens",
+        "ladybug.fill",
+        "faceid",
+        "timer",
+        "leaf.fill",
+        "link.badge.plus",
+        "moon.circle.fill",
+        "sparkles",
+        "circle.hexagongrid.fill"
     ]
     
     private var columnsText: String {
@@ -45,22 +47,22 @@ struct SymbolGrid: View {
 
             ScrollView {
                 LazyVGrid(columns: gridColumns) {
-                    ForEach(symbolNames, id: \.self) { name in
-                        NavigationLink(destination: ItemDetail(symbolName: name)) {
+                    ForEach(symbols) { symbol in
+                        NavigationLink(destination: ItemDetail(symbolName: symbol.name)) {
                             ZStack(alignment: .topTrailing) {
-                                Image(systemName: name)
+                                Image(systemName: symbol.name)
                                     .resizable()
                                     .scaledToFit()
-                                    .symbolRenderingMode(.hierarchical)
+                                    .symbolRenderingMode(.multicolor)
                                     .foregroundColor(.accentColor)
                                     .ignoresSafeArea(.container, edges: .bottom)
                                     .cornerRadius(8)
                                 
                                 if isEditing {
                                     Button {
-                                        guard let index = symbolNames.firstIndex(of: name) else { return }
+                                        guard let index = symbols.firstIndex(where: { $0.name == symbol.name }) else { return }
                                         withAnimation {
-                                            _ = symbolNames.remove(at: index)
+                                            _ = symbols.remove(at: index)
                                         }
                                     } label: {
                                         Image(systemName: "xmark.square.fill")
@@ -103,7 +105,7 @@ struct SymbolGrid: View {
     private func addSymbol() {
         guard let name = selectedSymbolName else { return }
         withAnimation {
-            symbolNames.insert(name, at: 0)
+            symbols.insert(Symbol(name: name), at: 0)
         }
     }
 }
