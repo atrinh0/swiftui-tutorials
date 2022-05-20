@@ -6,6 +6,8 @@ import SwiftUI
 
 struct SymbolPicker: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
+
     @Binding var name: String?
 
     private let columns = Array(repeating: GridItem(.flexible()), count: 4)
@@ -45,24 +47,37 @@ struct SymbolPicker: View {
     ]
 
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns) {
-                ForEach(pickableItems, id: \.self) { item in
-                    Button {
-                        self.name = item
-                        presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        Image(systemName: item)
-                            .resizable()
-                            .scaledToFit()
-                            .symbolRenderingMode(.multicolor)
-                            .foregroundColor(.accentColor)
-                            .ignoresSafeArea(.container, edges: .bottom)
+        NavigationView {
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(pickableItems, id: \.self) { item in
+                        Button {
+                            self.name = item
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            Image(systemName: item)
+                                .resizable()
+                                .scaledToFit()
+                                .symbolRenderingMode(.multicolor)
+                                .foregroundColor(.accentColor)
+                                .ignoresSafeArea(.container, edges: .bottom)
+                        }
+                        .padding()
+                        .buttonStyle(.plain)
                     }
-                    .padding()
-                    .buttonStyle(.plain)
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Close")
+                    }
+                }
+            }
+            .navigationBarTitle("Select Symbol")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
