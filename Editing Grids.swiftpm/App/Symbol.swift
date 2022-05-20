@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Symbol: Identifiable {
+struct Symbol: Identifiable, Equatable {
     let name: String
     let id = UUID()
 }

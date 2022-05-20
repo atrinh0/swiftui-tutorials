@@ -1,6 +1,6 @@
 /*
-See the License.txt file for this sample’s licensing information.
-*/
+ See the License.txt file for this sample’s licensing information.
+ */
 
 import SwiftUI
 
@@ -44,7 +44,6 @@ struct SymbolGrid: View {
                 }
                 .padding()
             }
-
             ScrollView {
                 LazyVGrid(columns: gridColumns) {
                     ForEach(symbols) { symbol in
@@ -57,18 +56,14 @@ struct SymbolGrid: View {
                                     .foregroundColor(.accentColor)
                                     .ignoresSafeArea(.container, edges: .bottom)
                                     .cornerRadius(8)
-                                
                                 if isEditing {
                                     Button {
-                                        guard let index = symbols.firstIndex(where: { $0.name == symbol.name }) else { return }
-                                        withAnimation {
-                                            _ = symbols.remove(at: index)
-                                        }
+                                        remove(symbol: symbol)
                                     } label: {
                                         Image(systemName: "xmark.square.fill")
-                                                    .font(Font.title)
-                                                    .symbolRenderingMode(.palette)
-                                                    .foregroundStyle(.white, Color.red)
+                                            .font(Font.title)
+                                            .symbolRenderingMode(.palette)
+                                            .foregroundStyle(.white, Color.red)
                                     }
                                     .offset(x: 7, y: -7)
                                 }
@@ -108,6 +103,13 @@ struct SymbolGrid: View {
             symbols.insert(Symbol(name: name), at: 0)
         }
         selectedSymbolName = nil
+    }
+
+    private func remove(symbol: Symbol) {
+        guard let index = symbols.firstIndex(where: { $0 == symbol }) else { return }
+        withAnimation {
+            _ = symbols.remove(at: index)
+        }
     }
 }
 
