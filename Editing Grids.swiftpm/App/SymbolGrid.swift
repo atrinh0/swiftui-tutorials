@@ -30,14 +30,10 @@ struct SymbolGrid: View {
         "circle.hexagongrid.fill"
     ]
     
-    private var columnsText: String {
-        numColumns > 1 ? "\(numColumns) Columns" : "1 Column"
-    }
-
     var body: some View {
         VStack {
             if isEditing {
-                Stepper(columnsText, value: $numColumns, in: 1...6, step: 1) { _ in
+                Stepper("^[\(numColumns) Column](inflect: true)", value: $numColumns, in: 1...6, step: 1) { _ in
                     withAnimation {
                         gridColumns = Array(repeating: GridItem(.flexible()), count: numColumns)
                     }
