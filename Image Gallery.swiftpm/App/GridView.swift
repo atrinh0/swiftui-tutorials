@@ -13,15 +13,15 @@ struct GridView: View {
 
     @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
     @State private var numColumns = initialColumns
-    
-    private var columnsTitle: String {
-        gridColumns.count > 1 ? "\(gridColumns.count) Columns" : "1 Column"
-    }
-    
+
     var body: some View {
         VStack {
             if isEditing {
-                ColumnStepper(title: columnsTitle, range: 1...8, columns: $gridColumns)
+                Stepper("^[\(numColumns) Column](inflect: true)", value: $numColumns, in: 1...8, step: 1) { _ in
+                    withAnimation {
+                        gridColumns = Array(repeating: GridItem(.flexible()), count: numColumns)
+                    }
+                }
                 .padding()
             }
             ScrollView {
@@ -79,7 +79,8 @@ struct GridView: View {
 
 struct GridView_Previews: PreviewProvider {
     static var previews: some View {
-        GridView().environmentObject(DataModel())
+        GridView()
+            .environmentObject(DataModel())
             .previewDevice("iPad (8th generation)")
     }
 }
