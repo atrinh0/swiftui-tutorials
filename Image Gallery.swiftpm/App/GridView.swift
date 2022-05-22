@@ -9,10 +9,12 @@ struct GridView: View {
 
     private static let initialColumns = 3
     @State private var isAddingPhoto = false
-    @State private var isEditing = false
+    @State private var editMode = EditMode.inactive
 
     @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
     @State private var numColumns = initialColumns
+
+    private var isEditing: Bool { editMode == .active }
 
     var body: some View {
         VStack {
@@ -61,9 +63,7 @@ struct GridView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(isEditing ? "Done" : "Edit") {
-                    withAnimation { isEditing.toggle() }
-                }
+                EditButton()
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -74,6 +74,7 @@ struct GridView: View {
                 .disabled(isEditing)
             }
         }
+        .environment(\.editMode, $editMode)
     }
 }
 
