@@ -7,4 +7,5 @@ Image | Tutorial | Learnings
 <img src="images/chooseyourownstory.png" width="300"> | [Choose your own story](https://developer.apple.com/tutorials/sample-apps/chooseyourownstory) | Navigation view, links, popping to root has many different solutions
 <img src="images/dateplanner.png" width="300"> | [Date planner](https://developer.apple.com/tutorials/sample-apps/dateplanner) | StateObject, EnvironmentObject, foregroundStyle, Identifiable, split view navigation and placeholder labels, trailing commas on lists
 <img src="images/organisingwithgrids.png" width="300"> | [Organising with Grids](https://developer.apple.com/tutorials/sample-apps/organizingwithgrids) | Honeycomb grid layout
-<img src="images/editinggrids.png" width="300"> | [Editing Grids](https://developer.apple.com/tutorials/sample-apps/editinggrids) | Dynamic number of items per row, Pluraliser, `EditButton` 
+<img src="images/editinggrids.png" width="300"> | [Editing Grids](https://developer.apple.com/tutorials/sample-apps/editinggrids) | Dynamic number of items per row, Pluraliser, `EditButton`
+<img src="images/imagegallery.png" width="300"> | [Image Gallery](https://developer.apple.com/tutorials/sample-apps/imagegallery) | `AsyncImage`, PhotoPicker, `Task { @MainActor in }` syntax
