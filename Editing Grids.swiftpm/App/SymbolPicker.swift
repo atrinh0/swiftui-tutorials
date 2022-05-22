@@ -5,7 +5,6 @@ See the License.txt file for this sample’s licensing information.
 import SwiftUI
 
 struct SymbolPicker: View {
-    @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
 
     @Binding var name: String?
@@ -53,7 +52,7 @@ struct SymbolPicker: View {
                     ForEach(pickableItems, id: \.self) { item in
                         Button {
                             self.name = item
-                            presentationMode.wrappedValue.dismiss()
+                            dismiss()
                         } label: {
                             Image(systemName: item)
                                 .resizable()
