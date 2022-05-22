@@ -3,6 +3,7 @@ See the License.txt file for this sample’s licensing information.
 */
 
 import Foundation
+import SwiftUI
 
 class DataModel: ObservableObject {
     @Published var items: [Item] = []
@@ -16,8 +17,16 @@ class DataModel: ObservableObject {
         urls.forEach { items.append(Item(url: $0)) }
     }
 
-    func addItem(_ item: Item) {
-        items.insert(item, at: 0)
+    func add(url: URL) {
+        if let savedUrl = FileManager.default.copyItemToDocumentDirectory(from: url) {
+            // Add the new item to the data model.
+            let item = Item(url: savedUrl)
+            Task { @MainActor in
+                withAnimation {
+                    addItem(item)
+                }
+            }
+        }
     }
 
     func removeItem(_ item: Item) {
@@ -25,6 +34,10 @@ class DataModel: ObservableObject {
             items.remove(at: index)
             FileManager.default.removeItemFromDocumentDirectory(url: item.url)
         }
+    }
+
+    private func addItem(_ item: Item) {
+        items.insert(item, at: 0)
     }
 }
 

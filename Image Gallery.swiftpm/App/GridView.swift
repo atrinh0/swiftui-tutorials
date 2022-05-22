@@ -59,7 +59,9 @@ struct GridView: View {
         .navigationBarTitle("Image Gallery")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $isAddingPhoto) {
-            PhotoPicker()
+            PhotoPicker() { url in
+                dataModel.add(url: url)
+            }
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
