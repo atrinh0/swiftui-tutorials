@@ -17,7 +17,7 @@ struct LoadableImage: View {
                     .shadow(radius: 5)
                     .accessibility(hidden: false)
                     .accessibilityLabel(Text(imageMetadata.description))
-            }  else if phase.error != nil  {
+            } else if phase.error != nil  {
                 VStack {
                     Image("pandaplaceholder")
                         .resizable()
@@ -28,7 +28,6 @@ struct LoadableImage: View {
                     Text("Please try again.")
                         .font(.title3)
                 }
-                
             } else {
                 ProgressView()
             }
