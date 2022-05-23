@@ -12,24 +12,24 @@ let package = Package(
     platforms: [
         .iOS("15.2")
     ],
-    products: [ 
+    products: [
         .iOSApplication(
             name: "Bubble Level",
             targets: ["App"],
+            bundleIdentifier: "com.atrinh.bubblelevel",
+            teamIdentifier: "6DRH5697SN",
             displayVersion: "1.0",
             bundleVersion: "1",
             iconAssetName: "AppIcon",
             supportedDeviceFamilies: [
-                .pad, .phone
+                .pad,
+                .phone
             ],
             supportedInterfaceOrientations: [
                 .portrait,
                 .landscapeRight,
                 .landscapeLeft,
                 .portraitUpsideDown(.when(deviceFamilies: [.pad]))
-            ],
-            capabilities: [
-
             ]
         )
     ],

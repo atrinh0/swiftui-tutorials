@@ -7,27 +7,27 @@ import SwiftUI
 struct BubbleLevel: View {
     @EnvironmentObject var detector: MotionDetector
 
-    let range = Double.pi
-    let levelSize: CGFloat = 300
+    private let range = Double.pi
+    private let levelSize: CGFloat = 300
 
-    var bubbleXPosition: CGFloat {
+    private var bubbleXPosition: CGFloat {
         let zeroBasedRoll = detector.roll + range / 2
         let rollAsFraction = zeroBasedRoll / range
         return rollAsFraction * levelSize
     }
 
-    var bubbleYPosition: CGFloat {
+    private var bubbleYPosition: CGFloat {
         let zeroBasedPitch = detector.pitch + range / 2
         let pitchAsFraction = zeroBasedPitch / range
         return pitchAsFraction * levelSize
     }
 
-    var verticalLine: some View {
+    private var verticalLine: some View {
         Rectangle()
             .frame(width: 0.5, height: 40)
     }
 
-    var horizontalLine: some View {
+    private var horizontalLine: some View {
         Rectangle()
             .frame(width: 40, height: 0.5)
     }

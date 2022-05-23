@@ -7,11 +7,11 @@ import SwiftUI
 struct OrientationDataView: View {
     @EnvironmentObject var detector: MotionDetector
 
-    var rollString: String {
+    private var rollString: String {
         detector.roll.describeAsFixedLengthString()
     }
 
-    var pitchString: String {
+    private var pitchString: String {
         detector.pitch.describeAsFixedLengthString()
     }
 
