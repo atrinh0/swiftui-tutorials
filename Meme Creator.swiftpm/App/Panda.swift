@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct Panda: Decodable {
+struct Panda: Decodable, Hashable {
     var description: String
     var imageUrl: URL?
     
