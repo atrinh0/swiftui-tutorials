@@ -8,10 +8,15 @@ struct LevelView: View {
     @EnvironmentObject var motionDetector: MotionDetector
 
     var body: some View {
-        VStack {
+        ZStack {
+            Color.black
+                .edgesIgnoringSafeArea(.all)
+            Color.green
+                .edgesIgnoringSafeArea(.all)
+                .opacity(motionDetector.isLevel ? 1 : 0)
             BubbleLevel()
             OrientationDataView()
-                .padding(.top, 80)
+                .frame(width: 300, height: 300)
         }
         .onAppear {
             motionDetector.start()

@@ -4,6 +4,7 @@ See the License.txt file for this sample’s licensing information.
 
 import CoreMotion
 import UIKit
+import SwiftUI
 
 class MotionDetector: ObservableObject {
     private let motionManager = CMMotionManager()
@@ -11,12 +12,11 @@ class MotionDetector: ObservableObject {
     private var timer = Timer()
     private var updateInterval: TimeInterval
 
-    @Published var pitch: Double = 0
-    @Published var roll: Double = 0
+    @Published var pitch: Double = 0.8
+    @Published var roll: Double = 0.35
     @Published var zAcceleration: Double = 0
+    @Published var isLevel = false
 
-    var onUpdate: (() -> Void) = {}
-    
     private var currentOrientation: UIDeviceOrientation = .landscapeLeft
     private var orientationObserver: NSObjectProtocol? = nil
     private let notification = UIDevice.orientationDidChangeNotification
@@ -47,13 +47,9 @@ class MotionDetector: ObservableObject {
         }
     }
     
-    private func updateMotionData() {
-        if let data = motionManager.deviceMotion {
-            (roll, pitch) = currentOrientation.adjustedRollAndPitch(data.attitude)
-            zAcceleration = data.userAcceleration.z
-            
-            onUpdate()
-        }
+    func started() -> MotionDetector {
+        start()
+        return self
     }
 
     func stop() {
@@ -71,9 +67,14 @@ class MotionDetector: ObservableObject {
 }
 
 extension MotionDetector {
-    func started() -> MotionDetector {
-        start()
-        return self
+    private func updateMotionData() {
+        if let data = motionManager.deviceMotion {
+            (roll, pitch) = currentOrientation.adjustedRollAndPitch(data.attitude)
+            zAcceleration = data.userAcceleration.z
+            withAnimation {
+                isLevel = abs(roll) < 0.02 && abs(pitch) < 0.02
+            }
+        }
     }
 }
 

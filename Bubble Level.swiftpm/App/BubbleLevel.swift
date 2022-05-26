@@ -9,58 +9,36 @@ struct BubbleLevel: View {
 
     private let range = Double.pi
     private let levelSize: CGFloat = 300
+    private let bubbleSize: CGFloat = 200
 
-    private var bubbleXPosition: CGFloat {
-        let zeroBasedRoll = detector.roll + range / 2
+    private func bubbleXPosition(_ isFirst: Bool) -> CGFloat {
+        let zeroBasedRoll = (detector.roll * (isFirst ? 1 : -1)) + range / 2
         let rollAsFraction = zeroBasedRoll / range
         return rollAsFraction * levelSize
     }
 
-    private var bubbleYPosition: CGFloat {
-        let zeroBasedPitch = detector.pitch + range / 2
+    private func bubbleYPosition(_ isFirst: Bool) -> CGFloat {
+        let zeroBasedPitch = (detector.pitch * (isFirst ? 1 : -1)) + range / 2
         let pitchAsFraction = zeroBasedPitch / range
         return pitchAsFraction * levelSize
     }
 
-    private var verticalLine: some View {
-        Rectangle()
-            .frame(width: 0.5, height: 40)
-    }
-
-    private var horizontalLine: some View {
-        Rectangle()
-            .frame(width: 40, height: 0.5)
-    }
-
     var body: some View {
-        Circle()
-            .foregroundStyle(Color.secondary.opacity(0.25))
-            .frame(width: levelSize, height: levelSize)
-            .overlay(
-                ZStack {
-                    
-                    Circle()
-                        .foregroundColor(.accentColor)
-                        .frame(width: 50, height: 50)
-                        .position(x: bubbleXPosition,
-                                  y: bubbleYPosition)
-                    
-                    Circle()
-                        .stroke(lineWidth: 0.5)
-                        .frame(width: 20, height: 20)
-                    verticalLine
-                    horizontalLine
-                    
-                    verticalLine
-                        .position(x: levelSize / 2, y: 0)
-                    verticalLine
-                        .position(x: levelSize / 2, y: levelSize)
-                    horizontalLine
-                        .position(x: 0, y: levelSize / 2)
-                    horizontalLine
-                        .position(x: levelSize, y: levelSize / 2)
-                }
-            )
+        ZStack {
+            Circle()
+                .foregroundColor(Color(red: 254/255, green: 44/255, blue: 85/255, opacity: 1))
+                .frame(width: bubbleSize, height: bubbleSize)
+                .position(x: bubbleXPosition(true),
+                          y: bubbleYPosition(true))
+                .blendMode(.plusLighter)
+            Circle()
+                .foregroundColor(Color(red: 37/255, green: 244/255, blue: 238/255, opacity: 1))
+                .frame(width: bubbleSize, height: bubbleSize)
+                .position(x: bubbleXPosition(false),
+                          y: bubbleYPosition(false))
+                .blendMode(.plusLighter)
+        }
+        .frame(width: levelSize, height: levelSize)
     }
 }
 

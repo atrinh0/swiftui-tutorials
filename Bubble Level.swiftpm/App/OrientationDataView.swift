@@ -7,21 +7,22 @@ import SwiftUI
 struct OrientationDataView: View {
     @EnvironmentObject var detector: MotionDetector
 
-    private var rollString: String {
-        detector.roll.describeAsFixedLengthString()
-    }
-
-    private var pitchString: String {
-        detector.pitch.describeAsFixedLengthString()
-    }
-
     var body: some View {
-        VStack {
-            Text("Horizontal: " + rollString)
-                .font(.system(.body, design: .monospaced))
-            Text("Vertical: " + pitchString)
-                .font(.system(.body, design: .monospaced))
-        }
+        Text(averagePitchAndRollString)
+            .font(.system(size: 70))
+            .foregroundStyle(.white)
+            .rotationEffect(rotationAngle)
+            .blendMode(.difference)
+    }
+
+    private var averagePitchAndRollString: String {
+        let roll = abs(detector.roll)
+        let pitch = abs(detector.pitch)
+        return (-sqrt(roll * roll + pitch * pitch)).describeAsFixedLengthString()
+    }
+
+    private var rotationAngle: Angle {
+        Angle(radians: -atan2(detector.roll, detector.pitch))
     }
 }
 
