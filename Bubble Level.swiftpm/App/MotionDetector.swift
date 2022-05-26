@@ -12,8 +12,8 @@ class MotionDetector: ObservableObject {
     private var timer = Timer()
     private var updateInterval: TimeInterval
 
-    @Published var pitch: Double = 0.8
-    @Published var roll: Double = 0.35
+    @Published var pitch: Double = 0
+    @Published var roll: Double = 0
     @Published var zAcceleration: Double = 0
     @Published var isLevel = false
 
