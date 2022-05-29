@@ -19,7 +19,7 @@ class MotionDetector: ObservableObject {
     
     private var currentOrientation: UIDeviceOrientation = .landscapeLeft
     private var orientationObserver: NSObjectProtocol? = nil
-    let orientationNotification = UIDevice.orientationDidChangeNotification
+    private let orientationNotification = UIDevice.orientationDidChangeNotification
 
     init(updateInterval: TimeInterval) {
         self.updateInterval = updateInterval
@@ -48,7 +48,7 @@ class MotionDetector: ObservableObject {
         }
     }
     
-    func updateMotionData() {
+    private func updateMotionData() {
         if let data = motionManager.deviceMotion {
             (roll, pitch) = currentOrientation.adjustedRollAndPitch(data.attitude)
             zAcceleration = data.userAcceleration.z

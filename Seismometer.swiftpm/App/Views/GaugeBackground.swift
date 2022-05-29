@@ -12,24 +12,9 @@ extension Angle: Identifiable {
 
 struct GaugeBackground: View {
     let width: Double
-    let minAngle = Angle(degrees: -90)
-    let maxAngle = Angle(degrees: 90)
-    let tickCount = 17
-    
-    var tickLength: Double {
-        width * 0.05
-    }
-    
-    var gaugeTickAngles: [Angle] {
-        let tickDegrees = (maxAngle.degrees - minAngle.degrees) / (Double(tickCount) - 1)
-        var angles = [Angle]()
-        
-        for tick in 1..<tickCount - 1 {
-            angles.append(Angle(degrees: 90 - (Double(tick) * tickDegrees)))
-        }
-        
-        return angles
-    }
+    private let minAngle = Angle(degrees: -90)
+    private let maxAngle = Angle(degrees: 90)
+    private let tickCount = 17
     
     var body: some View {
         ZStack {
@@ -52,6 +37,21 @@ struct GaugeBackground: View {
             }
         }
         .frame(width: width, height: width / 2)
+    }
+
+    private var tickLength: Double {
+        width * 0.05
+    }
+
+    private var gaugeTickAngles: [Angle] {
+        let tickDegrees = (maxAngle.degrees - minAngle.degrees) / (Double(tickCount) - 1)
+        var angles = [Angle]()
+
+        for tick in 1..<tickCount - 1 {
+            angles.append(Angle(degrees: 90 - (Double(tick) * tickDegrees)))
+        }
+
+        return angles
     }
 }
 
