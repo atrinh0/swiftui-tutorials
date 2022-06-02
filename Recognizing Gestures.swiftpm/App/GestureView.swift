@@ -62,21 +62,46 @@ struct GestureView: View {
                 lineEnd = value.location
             }
     }
-        
+    
+    @GestureState private var magnifyBy = 1.0
+    private var magnificationGesture: some Gesture {
+        MagnificationGesture()
+            .updating($magnifyBy) { currentState, gestureState, transaction in
+                gestureState = currentState
+            }
+    }
+    
     var body: some View {
+        ZStack {
+            Path { path in
+                path.move(to: lineStart)
+                path.addLine(to: lineEnd)
+            }
+            .stroke(Color.green, lineWidth: 8.0)
+            .contentShape(Rectangle())
+            .gesture(lineDrawingGesture)
             Capsule()
                 .foregroundColor(color)
                 .frame(width: size.width, height: size.height)
                 .rotationEffect(rotation)
+                .scaleEffect(magnifyBy)
                 .offset(offset)
                 .gesture(tapGesture)
                 .gesture(longPressGesture)
                 .gesture(dragGesture)
-                .gesture(rotationGesture)
+                .gesture(magnificationGesture)
+                .simultaneousGesture(rotationGesture)
+        }
     }
     
     private static var randomDimension: CGFloat {
         // between 40-250
         CGFloat(arc4random() % 210 + 40)
+    }
+}
+
+extension Color {
+    static func random() -> Color {
+        return Color(red: Double.random(in: 0...1), green: Double.random(in: 0...1), blue: Double.random(in: 0...1))
     }
 }
