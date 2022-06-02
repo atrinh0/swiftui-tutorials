@@ -5,24 +5,15 @@ See the License.txt file for this sample’s licensing information.
 import SwiftUI
 
 struct LongPressView: View {
-    @State private var sizeIndex = 0
-    
-    private var sizes: [CGSize] = [
-        CGSize(width: 150, height: 80),
-        CGSize(width: 200, height: 40),
-        CGSize(width: 50, height: 250),
-        CGSize(width: 220, height: 100),
-        CGSize(width: 90, height: 90),
-    ]
+    @State private var size: CGSize = CGSize(width: randomDimension,
+                                             height: randomDimension)
     
     var longPressGesture: some Gesture {
         LongPressGesture()
             .onEnded { value in
                 withAnimation {
-                    sizeIndex += 1
-                    if sizeIndex == sizes.count {
-                        sizeIndex = 0
-                    }
+                    self.size = CGSize(width: LongPressView.randomDimension,
+                                       height: LongPressView.randomDimension)
                 }
             }
     }
@@ -33,16 +24,16 @@ struct LongPressView: View {
             Spacer()
             Capsule()
                 .foregroundColor(.yellow)
-                .frame(width: sizes[sizeIndex].width, height: sizes[sizeIndex].height)
+                .frame(width: size.width, height: size.height)
                 .gesture(longPressGesture)
             Spacer()
         }
         .navigationTitle("Touch and Hold")
-        .toolbar {
-            Button("Reset") {
-                sizeIndex = 0
-            }
-        }
+    }
+    
+    private static var randomDimension: CGFloat {
+        // between 40-250
+        CGFloat(arc4random() % 210 + 40)
     }
 }
 
