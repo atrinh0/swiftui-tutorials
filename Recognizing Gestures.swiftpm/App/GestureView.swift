@@ -18,14 +18,12 @@ struct GestureView: View {
             }
     }
     
-    @State private var size: CGSize = CGSize(width: randomDimension,
-                                             height: randomDimension)
+    @State private var size: CGSize = CGSize(width: randomDimension, height: randomDimension)
     private var longPressGesture: some Gesture {
         LongPressGesture()
             .onEnded { value in
                 withAnimation {
-                    self.size = CGSize(width: GestureView.randomDimension,
-                                       height: GestureView.randomDimension)
+                    self.size = CGSize(width: GestureView.randomDimension, height: GestureView.randomDimension)
                 }
             }
     }
@@ -82,6 +80,12 @@ struct GestureView: View {
             .gesture(lineDrawingGesture)
             Capsule()
                 .foregroundColor(color)
+                .overlay {
+                    Image(systemName: "eyes.inverse")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(.white)
+                }
                 .frame(width: size.width, height: size.height)
                 .rotationEffect(rotation)
                 .scaleEffect(magnifyBy)
@@ -95,8 +99,7 @@ struct GestureView: View {
     }
     
     private static var randomDimension: CGFloat {
-        // between 40-250
-        CGFloat(arc4random() % 210 + 40)
+        CGFloat.random(in: 40...250)
     }
 }
 
