@@ -14,6 +14,10 @@ struct LevelView: View {
             Color.green
                 .edgesIgnoringSafeArea(.all)
                 .opacity(motionDetector.isLevel ? 1 : 0)
+            if !motionDetector.isMotionAvailable {
+                Color.red
+                    .edgesIgnoringSafeArea(.all)
+            }
             BubbleLevel()
             OrientationDataView()
                 .frame(width: 300, height: 300)

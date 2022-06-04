@@ -16,8 +16,9 @@ class MotionDetector: ObservableObject {
     @Published var roll: Double = 0
     @Published var zAcceleration: Double = 0
     @Published var isLevel = false
+    @Published var isMotionAvailable = false
 
-    private var currentOrientation: UIDeviceOrientation = .landscapeLeft
+    private var currentOrientation: UIDeviceOrientation = .portrait
     private var orientationObserver: NSObjectProtocol? = nil
     private let notification = UIDevice.orientationDidChangeNotification
 
@@ -35,8 +36,10 @@ class MotionDetector: ObservableObject {
                 self?.currentOrientation = UIDevice.current.orientation
             }
         }
+
+        isMotionAvailable = motionManager.isDeviceMotionAvailable
         
-        if motionManager.isDeviceMotionAvailable {
+        if isMotionAvailable {
             motionManager.startDeviceMotionUpdates()
             
             timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { _ in
@@ -68,12 +71,12 @@ class MotionDetector: ObservableObject {
 
 extension MotionDetector {
     private func updateMotionData() {
-        if let data = motionManager.deviceMotion {
-            (roll, pitch) = currentOrientation.adjustedRollAndPitch(data.attitude)
-            zAcceleration = data.userAcceleration.z
-            withAnimation {
-                isLevel = abs(roll) < 0.02 && abs(pitch) < 0.02
-            }
+        guard let data = motionManager.deviceMotion else { return }
+
+        (roll, pitch) = currentOrientation.adjustedRollAndPitch(data.attitude)
+        zAcceleration = data.userAcceleration.z
+        withAnimation {
+            isLevel = abs(roll) < 0.02 && abs(pitch) < 0.02
         }
     }
 }
