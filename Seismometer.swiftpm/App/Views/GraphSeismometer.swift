@@ -7,7 +7,7 @@ import SwiftUI
 struct GraphSeismometer: View {
     @EnvironmentObject private var detector: MotionDetector
     @State private var data = [Double]()
-    private let maxData = 1000
+    private let maxData = 500
 
     @State private var sensitivity = 0.0
     private let graphMaxValueMostSensitive = 0.01
