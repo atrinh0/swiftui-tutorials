@@ -26,7 +26,7 @@ struct GaugeBackground: View {
                             clockwise: true)
             }
             .fill()
-            .foregroundColor(Color.accentColor.opacity(0.15))
+            .foregroundColor(Color.primary.opacity(0.15))
             
             ForEach(gaugeTickAngles) { angle in
                 Rectangle()

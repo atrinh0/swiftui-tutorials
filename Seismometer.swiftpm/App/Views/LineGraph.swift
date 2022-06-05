@@ -55,7 +55,7 @@ struct LineGraph: View {
                 path.addLine(to: CGPoint(x: self.xGraphPosition(index, in: size), y: self.yGraphPosition(dataPoint, in: size)))
             }
 
-            context.stroke(path, with: .color(.accentColor))
+            context.stroke(path, with: .color(.red))
         }
         .onChange(of: data) { _ in
             timestep += 1

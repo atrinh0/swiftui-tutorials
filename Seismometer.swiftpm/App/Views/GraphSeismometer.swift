@@ -19,7 +19,7 @@ struct GraphSeismometer: View {
                 Spacer()
                 LineGraph(data: data, maxData: maxData, minValue: graphMinValue, maxValue: graphMaxValue)
                     .clipped()
-                    .background(Color.accentColor.opacity(0.1))
+                    .background(Color.primary.opacity(0.1))
                     .cornerRadius(20)
                     .overlay {
                         RoundedRectangle(cornerRadius: 20)
@@ -28,22 +28,16 @@ struct GraphSeismometer: View {
                     }
                     .padding()
                     .aspectRatio(1, contentMode: .fit)
-
                 Spacer()
-
                 Text("Sensitivity")
                     .font(.headline)
-
                 Slider(value: $sensitivity, in: 0...1, minimumValueLabel: Text("Min"), maximumValueLabel: Text("Max")) {
                     Text("Sensitivity")
                 }
                 .padding()
-
                 Spacer()
-
                 Text("Set your device on a flat surface to record vibrations using its motion sensors.")
                     .padding()
-
                 Spacer()
             }
             .navigationTitle(Text("Seismometer"))

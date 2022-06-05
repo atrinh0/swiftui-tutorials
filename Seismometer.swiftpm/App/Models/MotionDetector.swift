@@ -11,8 +11,6 @@ class MotionDetector: ObservableObject {
     private var timer = Timer()
     private var updateInterval: TimeInterval
 
-    @Published var pitch: Double = 0
-    @Published var roll: Double = 0
     @Published var zAcceleration: Double = 0
 
     var onUpdate: (() -> Void) = {}
@@ -50,7 +48,6 @@ class MotionDetector: ObservableObject {
     
     private func updateMotionData() {
         if let data = motionManager.deviceMotion {
-            (roll, pitch) = currentOrientation.adjustedRollAndPitch(data.attitude)
             zAcceleration = data.userAcceleration.z
 
             onUpdate()
@@ -75,24 +72,5 @@ extension MotionDetector {
     func started() -> MotionDetector {
         start()
         return self
-    }
-}
-
-extension UIDeviceOrientation {
-    func adjustedRollAndPitch(_ attitude: CMAttitude) -> (roll: Double, pitch: Double) {
-        switch self {
-        case .unknown, .faceUp, .faceDown:
-            return (attitude.roll, -attitude.pitch)
-        case .landscapeLeft:
-            return (attitude.pitch, -attitude.roll)
-        case .portrait:
-            return (attitude.roll, attitude.pitch)
-        case .portraitUpsideDown:
-            return (-attitude.roll, -attitude.pitch)
-        case .landscapeRight:
-            return (-attitude.pitch, attitude.roll)
-        @unknown default:
-            return (attitude.roll, attitude.pitch)
-        }
     }
 }
