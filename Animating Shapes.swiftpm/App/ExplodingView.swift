@@ -18,8 +18,8 @@ struct ExplodingView: View {
                             .frame(width: 20, height: 20)
                             .foregroundColor(.indigo)
                             .scaleEffect(isExploded ? Double.random(in: 1...2) : 1)
-                            .offset(x: isExploded ? randomDistance : CGFloat(150 - row * 20),
-                                    y: isExploded ? randomDistance : CGFloat(150 - col * 20))
+                            .offset(x: isExploded ? randomDistance : CGFloat(150 - col * 20),
+                                    y: isExploded ? randomDistance : CGFloat(150 - row * 20))
                             .opacity(isExploded ? 0 : 1)
                             .animation(isExploded ? .easeOut.speed(Double.random(in: 0.6...1)) : .spring(response: 0.3, dampingFraction: 0.6, blendDuration: 0.3),
                                        value: isExploded)
