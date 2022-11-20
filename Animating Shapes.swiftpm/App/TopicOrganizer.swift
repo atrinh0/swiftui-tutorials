@@ -13,7 +13,6 @@ enum Destination: String, CaseIterable {
     case dragnDropDots
     case dancingDots
 
-    
     @ViewBuilder
     static func view(forSelection selection: Destination) -> some View {
         switch selection {
@@ -77,7 +76,7 @@ struct TopicData {
         Topic(
             title: "Dancing Dots",
             description: "Explore an advanced animation that really pops.",
-            systemSymbol: "circle.grid.3x3",
+            systemSymbol: "circle.grid.3x3.fill",
             destination: .dancingDots
         )
     ]
