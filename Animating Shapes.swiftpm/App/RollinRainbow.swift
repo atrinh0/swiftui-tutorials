@@ -6,12 +6,12 @@ import SwiftUI
 
 struct RollinRainbowView: View {
     @State private var isAnimating = false
-    @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: 20)
+    @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: 13)
     @State private var colors: [Color] = [.red, .orange, .yellow, .green, .blue, .indigo, .purple]
     @State private var scaleFactor: CGFloat = 3
     
-    let springAnimation = Animation.spring(response: 0.3, dampingFraction: 0.3, blendDuration: 0.3)
-    let numCircles = 500
+    let springAnimation = Animation.spring(response: 0.3, dampingFraction: 0.1, blendDuration: 0.3)
+    let numCircles = 260
 
     var body: some View {
         VStack {
@@ -20,7 +20,6 @@ struct RollinRainbowView: View {
             Spacer()
             LazyVGrid(columns: gridColumns) {
                 ForEach(0..<numCircles, id: \.self) { index in
-                    
                     Circle()
                         .foregroundColor(colors[index % colors.count])
                         .scaleEffect(scaleFactor)
@@ -28,7 +27,7 @@ struct RollinRainbowView: View {
                                    value: scaleFactor)
                         .onTapGesture {
                             isAnimating = true
-                            scaleFactor = (Double(index + 1) / 4)
+                            scaleFactor = (Double((index % 13) + 1) / 4)
                         }
                 }
             }
