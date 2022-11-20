@@ -1,26 +1,23 @@
 /*
-See the License.txt file for this sample’s licensing information.
-*/
+ See the License.txt file for this sample’s licensing information.
+ */
 
 import SwiftUI
 
-class SmallDot : Identifiable, ObservableObject {
-	let id = UUID()
-    
-	@Published var offset : CGSize = .zero
-	@Published var color : Color = .primary
-}
-
-class BigDot : Identifiable, ObservableObject {
+class SmallDot: Identifiable, ObservableObject {
     let id = UUID()
-    
     @Published var offset: CGSize = .zero
     @Published var color: Color = .primary
-    @Published var scale: Double = 1.0
+    @Published var scale: Double = 1
+    @Published var opacity: Double = 1
+}
+
+class BigDot: Identifiable, ObservableObject {
+    let id = UUID()
     @Published var smallDots = [SmallDot]()
     
     init() {
-        for _ in 0..<5 {
+        for _ in 0..<25 {
             smallDots.append(SmallDot())
         }
     }
@@ -28,31 +25,36 @@ class BigDot : Identifiable, ObservableObject {
     func randomizePositions() {
         objectWillChange.send()
         for dot in smallDots {
-            dot.offset = CGSize(width: Double.random(in: -120...120), height: Double.random(in: -120...120))
+            dot.offset = CGSize(width: Double.random(in: -220...220),
+                                height: Double.random(in: -220...220))
             dot.color = DotTracker.randomColor
+            dot.scale = Double.random(in: 0.5...5.0)
+            dot.opacity = Double.random(in: 0.1...1.0)
         }
     }
- 
+
     func resetPositions() {
         objectWillChange.send()
         for dot in smallDots {
             dot.offset = .zero
             dot.color = .primary
+            dot.scale = 1
+            dot.opacity = 1
         }
     }
 
 }
 
-class DotTracker : ObservableObject {
+class DotTracker: ObservableObject {
     @Published var bigDots = [BigDot]()
     
-    static var colors: [Color] = [.pink, .purple, .mint, .blue, .yellow, .red, .teal, .cyan]
+    private static var colors: [Color] = [.red, .orange, .yellow, .green, .blue, .indigo, .purple]
     static var randomColor: Color {
         colors.randomElement() ?? .blue
     }
     
     init() {
-        for _ in 0..<100 {
+        for _ in 0..<9 {
             bigDots.append(BigDot())
         }
     }
@@ -60,9 +62,6 @@ class DotTracker : ObservableObject {
     func randomizePositions() {
         objectWillChange.send()
         for bigDot in bigDots {
-            bigDot.offset = CGSize(width: Double.random(in: -50...50), height: Double.random(in: -50...50))
-            bigDot.scale = 2.5
-            bigDot.color = DotTracker.randomColor
             bigDot.randomizePositions()
         }
     }
@@ -70,9 +69,6 @@ class DotTracker : ObservableObject {
     func resetPositions() {
         objectWillChange.send()
         for bigDot in bigDots {
-            bigDot.offset = .zero
-            bigDot.scale = 1.0
-            bigDot.color = DotTracker.randomColor
             bigDot.resetPositions()
         }
     }
@@ -80,31 +76,29 @@ class DotTracker : ObservableObject {
 }
 
 struct DancingDotsView: View {
-    private var columns = Array(repeating: GridItem(.flexible()), count: 10)
-    @StateObject var tracker = DotTracker()
+    private var columns = Array(repeating: GridItem(.fixed(10)), count: 3)
+    @StateObject private var tracker = DotTracker()
     @State private var isAnimating = false
 
     var body: some View {
         VStack {
-            Spacer()
-            LazyVGrid(columns: columns) {
-                ForEach(tracker.bigDots) { bigDot in
-                    ZStack {
-                        Circle()
-                            .offset(bigDot.offset)
-                            .foregroundColor(bigDot.color)
-                            .scaleEffect(bigDot.scale)
-                        ForEach(bigDot.smallDots) { smallDot in
-                            Circle()
-                                .offset(smallDot.offset)
-                                .foregroundColor(smallDot.color)
+            GeometryReader { geo in
+                LazyVGrid(columns: columns) {
+                    ForEach(tracker.bigDots) { bigDot in
+                        ZStack {
+                            ForEach(bigDot.smallDots) { smallDot in
+                                Circle()
+                                    .offset(smallDot.offset)
+                                    .foregroundColor(smallDot.color)
+                                    .scaleEffect(smallDot.scale)
+                                    .opacity(smallDot.opacity)
+                            }
                         }
                     }
                 }
+                .frame(minHeight: geo.size.height)
             }
-            .frame(minHeight: 500)
             .drawingGroup()
-            Spacer() 
             PlayResetButton(animating: $isAnimating) {
                 withAnimation(.spring(response: 0.6, dampingFraction: 0.5, blendDuration: 1).repeatForever()) {
                     if isAnimating {
